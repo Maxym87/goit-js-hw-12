@@ -52,7 +52,7 @@ form.addEventListener('submit', async event => {
       currentPage = 1;
       loadMoreBtn.classList.remove('is-hidden');
       spinner.classList.remove('is');
-      lightbox.refresh();
+
       form.reset();
     })
     .catch(error => console.log('Error:', error));
@@ -64,7 +64,9 @@ loadMoreBtn.addEventListener('click', async event => {
     const response = await getImages(currentQuery, 15, currentPage);
     if (currentPage * 15 < totalHits) {
       gallery.innerHTML += createMarkup(response);
+      lightbox.refresh();
     } else {
+      loadMoreBtn.classList.add('is-hidden');
       iziToast.show({
         title: 'Info',
         timeout: 2000,
@@ -78,3 +80,29 @@ loadMoreBtn.addEventListener('click', async event => {
     alert(error.message);
   }
 });
+
+// window.onscroll = function () {
+//   Scroll();
+// };
+
+// function Scroll() {
+//   const cardHeight = container.firstElementChild.getBoundingClientRect().height;
+//   window.scrollBy({
+//     top: 2 * cardHeight,
+//     behavior: 'smooth',
+//   });
+// }
+
+window.onscroll = function () {
+  window.innerHeight + window.scrollY >= document.body.offsetHeight;
+};
+
+function smootScroll() {
+  const galleryHeight =
+    container.firstElementChild.getBoundingClientRect().height;
+
+  window.scrollBy({
+    top: 2 * galleryHeight,
+    behavior: 'smooth',
+  });
+}

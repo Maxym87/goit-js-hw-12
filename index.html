@@ -6,9 +6,9 @@
     <title>Gallery</title>
     
     <script type="module" crossorigin src="/goit-js-hw-12/commonHelpers.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-5b791d57.js">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-5401a4b0.js">
     <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-cf6910df.css">
-    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-3273c63b.css">
+    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-a4cc72ed.css">
   </head>
   <body>
     <form class="form" id="search-form">
@@ -24,6 +24,15 @@
     <div class="container">
       <ul class="gallery"></ul>
     </div>
+    <button
+      type="button"
+      class="btn load-more is-hidden"
+      data-action="load-more"
+    >
+      <span class="spinner is-hidden" role="status" aria-hidden="true"></span>
+
+      <span class="label">Load more</span>
+    </button>
     
     
     

@@ -53,7 +53,7 @@ form.addEventListener('submit', async event => {
       currentQuery = userInput;
       currentPage = 1;
       loadMoreBtn.classList.remove('is-hidden');
-
+      lightbox.refresh();
       form.reset();
     })
     .catch(error => console.log('Error:', error));

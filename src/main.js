@@ -65,6 +65,12 @@ loadMoreBtn.addEventListener('click', async event => {
     if (currentPage * 15 < totalHits) {
       gallery.innerHTML += createMarkup(response);
       lightbox.refresh();
+      const newImagesHeight =
+        gallery.lastElementChild.getBoundingClientRect().height;
+      window.scrollBy({
+        top: 2 * newImagesHeight,
+        behavior: 'smooth',
+      });
     } else {
       loadMoreBtn.classList.add('is-hidden');
       iziToast.show({
@@ -87,12 +93,6 @@ window.onscroll = function () {
 
 function Scroll() {
   const cardHeight = container.firstElementChild.getBoundingClientRect().height;
-
-  window.scrollBy({
-    top: 2 * cardHeight,
-    behavior: 'smooth',
-  });
-
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
     smoothScroll();
   }

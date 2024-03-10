@@ -41,6 +41,8 @@ form.addEventListener('submit', async event => {
         'Sorry, there are no images matching your search query. Please, try again!',
     });
     container.style.display = 'none';
+    loadMoreBtn.style.display = 'none';
+    spinner.style.display = 'none';
     return;
   }
 

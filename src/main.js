@@ -2,6 +2,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import cross from './img/cross.svg';
 
 import { getImages } from './js/pixabay-api';
 import { createMarkup } from './js/render-functions';
@@ -15,10 +16,18 @@ const form = document.querySelector('.form');
 const input = document.querySelector('.input');
 const container = document.querySelector('.container');
 const gallery = document.querySelector('.gallery');
+const loadMoreBtn = document.querySelector('[data-action="load-more"]');
+const spinner = document.querySelector(
+  '[data-action="load-more"] span.spinner'
+);
 
 container.style.display = 'none';
 
-form.addEventListener('submit', event => {
+let currentPage;
+let currentQuery;
+let totalHits;
+
+form.addEventListener('submit', async event => {
   event.preventDefault();
   container.style.display = 'block';
   gallery.innerHTML = '';
@@ -35,11 +44,36 @@ form.addEventListener('submit', event => {
     return;
   }
 
-  getImages(userInput)
+  getImages(userInput, 15, 1)
     .then(images => {
+      totalHits = images.totalHits;
       gallery.innerHTML = createMarkup(images);
+      currentQuery = userInput;
+      currentPage = 1;
+      loadMoreBtn.classList.remove('is-hidden');
+      spinner.classList.remove('is');
       lightbox.refresh();
       form.reset();
     })
     .catch(error => console.log('Error:', error));
+});
+
+loadMoreBtn.addEventListener('click', async event => {
+  currentPage += 1;
+  try {
+    const response = await getImages(currentQuery, 15, currentPage);
+    if (currentPage * 15 < totalHits) {
+    } else {
+      iziToast.show({
+        title: 'Info',
+        timeout: 2000,
+        color: 'blue',
+        position: 'bottomRight',
+        message: "We're sorry, but you've reached the end of search results.",
+      });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert(error.message);
+  }
 });

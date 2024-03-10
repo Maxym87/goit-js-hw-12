@@ -1,14 +1,15 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
+import cross from '../img/cross.svg';
 
 const KEY = '42680318-96c21e5764acdc13d94b87bb9';
 const URL = 'https://pixabay.com/api/';
 const container = document.querySelector('.container');
 
-export async function getImages(QUERY) {
+export async function getImages(QUERY, perPage, page) {
   container.style.display = 'block';
-  const link = `${URL}?key=${KEY}&q=${QUERY}&image_type=photo&orientation=horizontal&savesearch=true`;
+  const link = `${URL}?key=${KEY}&q=${QUERY}&image_type=photo&orientation=horizontal&savesearch=true&page=${page}&per_page=${perPage}`;
   try {
     const response = await axios.get(link);
 

@@ -97,6 +97,13 @@
   color: #2e2f42;
 }
 
+.gallery-info-par{
+ display: flex;
+ justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .load-more {
   display: block;
   margin: 0 auto;

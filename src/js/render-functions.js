@@ -19,8 +19,7 @@ export function createMarkup(images) {
                   width="360px" 
                   height="200px"
                 />
-              </a>
-              <div class="gallery-info">
+                <div class="gallery-info">
                 <p class="gallery-info-par">
                   <span class="gallery-info-span">Likes: <span class="tag-span">${likes}</span></span>    
                 </p>
@@ -34,6 +33,8 @@ export function createMarkup(images) {
                   <span class="gallery-info-span">Downloads: <span class="tag-span">${downloads}</span></span>    
                 </p>
               </div>
+              </a>
+              
             </li>`
     )
     .join('');

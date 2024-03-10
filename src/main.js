@@ -26,7 +26,6 @@ container.style.display = 'none';
 let currentPage;
 let currentQuery;
 let totalHits;
-let imageHeight;
 
 form.addEventListener('submit', async event => {
   event.preventDefault();
@@ -54,9 +53,6 @@ form.addEventListener('submit', async event => {
       loadMoreBtn.classList.remove('is-hidden');
       spinner.classList.remove('is');
 
-      imageHeight = gallery
-        .querySelector('.gallery-item')
-        .getBoundingClientRect().height;
       form.reset();
     })
     .catch(error => console.log('Error:', error));
@@ -69,7 +65,6 @@ loadMoreBtn.addEventListener('click', async event => {
     if (currentPage * 15 < totalHits) {
       gallery.innerHTML += createMarkup(response);
       lightbox.refresh();
-      smoothScroll();
     } else {
       loadMoreBtn.classList.add('is-hidden');
       iziToast.show({
@@ -85,6 +80,23 @@ loadMoreBtn.addEventListener('click', async event => {
     alert(error.message);
   }
 });
+
+window.onscroll = function () {
+  Scroll();
+};
+
+function Scroll() {
+  const cardHeight = container.firstElementChild.getBoundingClientRect().height;
+
+  window.scrollBy({
+    top: 2 * cardHeight,
+    behavior: 'smooth',
+  });
+
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    smoothScroll();
+  }
+}
 
 function smoothScroll() {
   const galleryHeight =

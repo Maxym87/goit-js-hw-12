@@ -69,10 +69,7 @@ loadMoreBtn.addEventListener('click', async event => {
     if (currentPage * 15 < totalHits) {
       gallery.innerHTML += createMarkup(response);
       lightbox.refresh();
-      window.scrollBy({
-        top: 2 * imageHeight,
-        behavior: 'smooth',
-      });
+      smoothScroll();
     } else {
       loadMoreBtn.classList.add('is-hidden');
       iziToast.show({

@@ -15,9 +15,11 @@ export async function getImages(QUERY, perPage, page) {
 
     if (response.data.hits.length === 0) {
       iziToast.error({
-        title: 'Error',
-        timeout: 2000,
-        position: 'bottomRight',
+        iconUrl: cross,
+        timeout: 3000,
+        position: 'topRight',
+        messageColor: '#FFF',
+        backgroundColor: '#FF544B',
         message:
           'Sorry, there are no images matching your search query. Please try again!',
       });

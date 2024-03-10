@@ -63,6 +63,7 @@ loadMoreBtn.addEventListener('click', async event => {
   try {
     const response = await getImages(currentQuery, 15, currentPage);
     if (currentPage * 15 < totalHits) {
+      gallery.innerHTML += createMarkup(response);
     } else {
       iziToast.show({
         title: 'Info',

@@ -21,8 +21,6 @@ export async function getImages(QUERY, perPage, page) {
         message:
           'Sorry, there are no images matching your search query. Please try again!',
       });
-      loadMoreBtn.style.display = 'none';
-      loader.style.display = 'none';
       searchForm.reset();
     }
     return response.data;

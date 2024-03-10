@@ -41,6 +41,7 @@ form.addEventListener('submit', async event => {
         'Sorry, there are no images matching your search query. Please, try again!',
     });
     container.style.display = 'none';
+    loadMoreBtn.classList.add('is-hidden');
 
     return;
   }
@@ -52,7 +53,6 @@ form.addEventListener('submit', async event => {
       currentQuery = userInput;
       currentPage = 1;
       loadMoreBtn.classList.remove('is-hidden');
-      spinner.classList.remove('is');
 
       form.reset();
     })

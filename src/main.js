@@ -60,18 +60,20 @@ form.addEventListener('submit', async event => {
 
 loadMoreBtn.addEventListener('click', async event => {
   currentPage += 1;
+  const lastPage = Math.ceil(totalHits / 15);
   try {
     const response = await getImages(currentQuery, 15, currentPage);
-    if (currentPage * 15 < totalHits) {
-      gallery.innerHTML += createMarkup(response);
-      lightbox.refresh();
-      const newImagesHeight =
-        gallery.lastElementChild.getBoundingClientRect().height;
-      window.scrollBy({
-        top: 2 * newImagesHeight,
-        behavior: 'smooth',
-      });
-    } else {
+
+    gallery.innerHTML += createMarkup(response);
+    lightbox.refresh();
+    const newImagesHeight =
+      gallery.lastElementChild.getBoundingClientRect().height;
+    window.scrollBy({
+      top: 2 * newImagesHeight,
+      behavior: 'smooth',
+    });
+
+    if (lastPage === currentPage) {
       loadMoreBtn.classList.add('is-hidden');
       iziToast.show({
         title: 'Info',

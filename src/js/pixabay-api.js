@@ -6,6 +6,7 @@ import cross from '../img/cross.svg';
 const KEY = '42680318-96c21e5764acdc13d94b87bb9';
 const URL = 'https://pixabay.com/api/';
 const container = document.querySelector('.container');
+const loadMoreBtn = document.querySelector('[data-action="load-more"]');
 
 export async function getImages(QUERY, perPage, page) {
   container.style.display = 'block';
@@ -14,6 +15,7 @@ export async function getImages(QUERY, perPage, page) {
     const response = await axios.get(link);
 
     if (response.data.hits.length === 0) {
+      loadMoreBtn.classList.add('is-hidden');
       iziToast.error({
         iconUrl: cross,
         timeout: 3000,

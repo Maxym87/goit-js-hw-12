@@ -33,6 +33,8 @@ form.addEventListener('submit', async event => {
   gallery.innerHTML = '';
   const userInput = input.value.trim();
   if (userInput === '') {
+    loadMoreBtn.classList.add('is-hidden');
+
     iziToast.show({
       iconUrl: cross,
       color: '#EF4040',

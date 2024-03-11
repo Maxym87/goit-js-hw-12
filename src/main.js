@@ -56,6 +56,9 @@ form.addEventListener('submit', async event => {
       loadMoreBtn.classList.remove('is-hidden');
       lightbox.refresh();
       form.reset();
+      if (totalHits <= 15) {
+        loadMoreBtn.classList.add('is-hidden');
+      }
     })
     .catch(error => console.log('Error:', error));
 });
